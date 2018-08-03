@@ -1,4 +1,4 @@
-node {
+node('master') {
     stage('build'){
 		dir('docker'){
 			app = docker.build("rgonzalez01/apigee-cicd-base-image")

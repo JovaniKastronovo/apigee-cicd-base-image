@@ -37,6 +37,9 @@ node('docker'){
                 app.push("latest")
             }
         }
+		stage('cleanup'){
+			sh "docker -H ${HOST_IP} rmi ${app.id}"
+		}
     }
 	}
 }

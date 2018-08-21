@@ -1,4 +1,4 @@
-node('master') {
+node {
 	checkout scm
     stage('build'){
 		dir('docker'){

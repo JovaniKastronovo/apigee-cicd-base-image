@@ -1,5 +1,6 @@
 node {
 	checkout scm
+	env
 	withDockerServer([uri: "tcp://${env.POD_IP}"]) {
 		stage('build'){
 			dir('docker'){

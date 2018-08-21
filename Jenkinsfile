@@ -13,7 +13,7 @@ spec:
     tty: true
     env:
     - name: POD_IP
-	  valueFrom:
+      valueFrom:
         fieldRef:
           fieldPath: status.hostIP
 """

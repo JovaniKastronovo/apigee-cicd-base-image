@@ -1,27 +1,11 @@
-podTemplate(label: 'jnlp', yaml: """
-apiVersion: v1
-kind: Pod
-metadata:
-  labels:
-    some-label: some-label-value
-spec:
-  containers:
-  - name: docker
-    image: docker
-    command:
-    - cat
-    tty: true
-    env:
-    - name: POD_IP
-	  valueFrom: 
-	    fieldRef:
-		  fieldPath: status.hostIP
-"""
+podTemplate(label: 'docker',
+  containers: [containerTemplate(name: 'docker', image: 'docker', ttyEnabled: true, command: 'cat')],
+  volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
   ) {
-node {
+node ('docker'){
 	checkout scm
 	echo sh(returnStdout: true, script: 'env')
-	withDockerServer([uri: "tcp://${env.POD_IP}"]) {
+	//withDockerServer([uri: "tcp://${env.POD_IP}"]) {
 		stage('build'){
 			dir('docker'){
 				app = docker.build("rgonzalez01/apigee-cicd-base-image")
@@ -32,6 +16,6 @@ node {
 				app.push("latest")
 			}
 		}
-	}
+	//}
 }
 }

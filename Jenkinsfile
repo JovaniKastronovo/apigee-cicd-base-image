@@ -1,3 +1,23 @@
+podTemplate(label: 'docker', yaml: """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    some-label: some-label-value
+spec:
+  containers:
+  - name: docker
+    image: docker
+    command:
+    - cat
+    tty: true
+    env:
+    - name: POD_IP
+	  valueFrom: 
+	    fieldRef:
+		  fieldPath: status.hostIP
+"""
+  ) {
 node {
 	checkout scm
 	echo sh(returnStdout: true, script: 'env')
@@ -13,4 +33,5 @@ node {
 			}
 		}
 	}
+}
 }

@@ -1,17 +1,6 @@
-podTemplate(label: 'docker', yaml: """
-apiVersion: v1
-kind: Pod
-metadata:
-  labels:
-    some-label: docker
-spec:
-  containers:
-  - name: docker
-    image: docker
-    command:
-    - cat
-    tty: true
-"""
+podTemplate(label: 'docker',
+  containers: [containerTemplate(name: 'docker', image: 'docker', ttyEnabled: true, command: 'cat')],
+  volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
   ) {
 node('docker'){
 	checkout scm

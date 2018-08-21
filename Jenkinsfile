@@ -23,6 +23,7 @@ node('docker'){
     container('docker'){
     checkout scm
     echo sh(returnStdout: true, script: 'env')
+	echo "tcp://${env.POD_IP}"
     withDockerServer([uri: "tcp://${env.POD_IP}"]) {
         stage('build'){
             dir('docker'){

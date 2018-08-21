@@ -22,7 +22,7 @@ spec:
 node('docker'){
     container('docker'){
     checkout scm
-    echo "LEL! ${env.getEnvironment()}"
+    echo "LEL! ${env}"
     withDockerServer([uri: "tcp://${env.POD_IP}"]) {
         stage('build'){
             dir('docker'){

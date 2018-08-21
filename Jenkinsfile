@@ -1,4 +1,4 @@
-podTemplate(label: 'docker', yaml: """
+podTemplate(label: 'jnlp', yaml: """
 apiVersion: v1
 kind: Pod
 metadata:

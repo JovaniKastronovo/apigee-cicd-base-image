@@ -18,7 +18,7 @@ spec:
 		  fieldPath: status.hostIP
 """
   ) {
-node{
+node('docker'){
 	checkout scm
 	echo sh(returnStdout: true, script: 'env')
 	withDockerServer([uri: "tcp://${env.POD_IP}"]) {

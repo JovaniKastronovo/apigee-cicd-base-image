@@ -22,9 +22,11 @@ spec:
 node('docker'){
     container('docker'){
     checkout scm
-	sh 'env'
-    sh 'echo LEL! $POD_IP'
-    withDockerServer([uri: "tcp://${env.POD_IP}"]) {
+	HOST_IP = sh (
+		script: 'echo $POD_IP',
+		returnStdout: true
+	).trim()
+    withDockerServer([uri: "tcp://${HOST_IP}"]) {
         stage('build'){
             dir('docker'){
                 app = docker.build("rgonzalez01/apigee-cicd-base-image")

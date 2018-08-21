@@ -20,6 +20,7 @@ spec:
   ) {
 
 node('docker'){
+    container('docker'){
     checkout scm
     echo sh(returnStdout: true, script: 'env')
     withDockerServer([uri: "tcp://${env.POD_IP}"]) {
@@ -34,5 +35,6 @@ node('docker'){
             }
         }
     }
+	}
 }
 }

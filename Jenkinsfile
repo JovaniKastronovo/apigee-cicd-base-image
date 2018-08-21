@@ -23,7 +23,7 @@ node('docker'){
     container('docker'){
     checkout scm
 	sh 'env'
-    echo "LEL! ${env.getProperty('POD_IP')}"
+    echo "LEL! ${env.getProperty('NODE_LABELS')}"
     withDockerServer([uri: "tcp://${env.POD_IP}"]) {
         stage('build'){
             dir('docker'){

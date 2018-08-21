@@ -1,6 +1,10 @@
 podTemplate(label: 'docker',
-  containers: [containerTemplate(name: 'docker', image: 'docker', ttyEnabled: true, command: 'cat')],
-  volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
+  containers: [containerTemplate(name: 'docker', image: 'docker', ttyEnabled: true, command: 'cat', envVars: [
+    containerEnvVar(key: 'POD_IP', value: 'valueFrom:
+        fieldRef:
+          apiVersion: v1
+          fieldPath: status.hostIP')
+  ])]
   ) {
 node('docker'){
 	checkout scm

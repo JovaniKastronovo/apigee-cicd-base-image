@@ -1,9 +1,8 @@
 podTemplate(label: 'docker',
   containers: [containerTemplate(name: 'docker', image: 'docker', ttyEnabled: true, command: 'cat', envVars: [
-    containerEnvVar(key: 'POD_IP', value: '''
-valueFrom:
-  fieldRef:
-    fieldPath: status.hostIP''')
+    containerEnvVar(key: 'POD_IP', valueFrom: '''
+fieldRef:
+  fieldPath: status.hostIP''')
   ])]
   ) {
 node('docker'){

@@ -15,7 +15,7 @@ spec:
     - name: POD_IP
       valueFrom:
         fieldRef:
-        fieldPath: status.hostIP
+          fieldPath: status.hostIP
 """
   ) {
 

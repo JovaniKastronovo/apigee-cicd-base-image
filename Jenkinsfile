@@ -11,11 +11,6 @@ spec:
     command:
     - cat
     tty: true
-    env:
-    - name: POD_IP
-	  valueFrom: 
-	    fieldRef:
-		  fieldPath: status.hostIP
 """
   ) {
 node('docker'){

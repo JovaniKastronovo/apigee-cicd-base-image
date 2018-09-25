@@ -34,13 +34,13 @@ node('docker'){
         }
         stage('push'){
             docker.withRegistry('https://registry.hub.docker.com', 'rgonzalez-dockerhub') {
-                app.push("latest")
+          //      app.push("latest")
             }
         }
-		stage('cleanup'){
-			sh "docker -H ${HOST_IP} rmi ${app.id}"
-		}
+        stage('cleanup'){
+             sh "docker -H ${HOST_IP} rmi ${app.id}"
+        }
     }
-	}
+}
 }
 }

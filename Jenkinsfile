@@ -30,7 +30,7 @@ node('docker'){
         stage('build'){
             dir('docker'){
             //    app = docker.build("rgonzalez01/apigee-cicd-base-image")
-                sh "docker build -t rgonzalez01/apigee-cicd-base-image:latest"
+                sh "docker build -t rgonzalez01/apigee-cicd-base-image ."
             }
         }
         stage('push'){
@@ -40,7 +40,8 @@ node('docker'){
             }
         }
         stage('cleanup'){
-             sh "docker -H ${HOST_IP} rmi ${app.id}"
+             //sh "docker -H ${HOST_IP} rmi ${app.id}"
+             //sh "docker -H ${HOST_IP} rmi "
         }
     }
 }

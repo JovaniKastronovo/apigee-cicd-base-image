@@ -29,16 +29,18 @@ node('docker'){
     withDockerServer([uri: "tcp://${HOST_IP}"]) {
         stage('build'){
             dir('docker'){
-                app = docker.build("rgonzalez01/apigee-cicd-base-image")
+            //    app = docker.build("rgonzalez01/apigee-cicd-base-image")
+                sh "docker build -t rgonzalez01/apigee-cicd-base-image:latest"
             }
         }
         stage('push'){
-       //     docker.withRegistry('https://registry.hub.docker.com', 'rgonzalez-dockerhub') {
+            docker.withRegistry('https://registry.hub.docker.com', 'rgonzalez-dockerhub') {
           //      app.push("latest")
+                sh "docker push rgonzalez01/apigee-cicd-base-image:latest"
             }
-        //}
+        }
         stage('cleanup'){
-        //     sh "docker -H ${HOST_IP} rmi ${app.id}"
+             sh "docker -H ${HOST_IP} rmi ${app.id}"
         }
     }
 }
